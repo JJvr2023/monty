@@ -3,12 +3,12 @@
 #include <string.h>
 #include "monty.h"
 
-struct Stack {
+typedef struct Stack {
   int data[STACK_SIZE];
   int top;
-};
+} stack_t;
 
-void push(struct Stack *stack, int value) {
+void push(stack_t *stack, int value) {
   if (stack->top == STACK_SIZE) {
     printf("Error: stack overflow\n");
     exit(EXIT_FAILURE);
@@ -17,7 +17,7 @@ void push(struct Stack *stack, int value) {
   stack->data[stack->top++] = value;
 }
 
-void pall(struct Stack *stack) {
+void pall(stack_t *stack) {
   int i;
 
   if (stack->top == 0) {
@@ -29,7 +29,7 @@ void pall(struct Stack *stack) {
   }
 }
 
-void pint(struct Stack *stack) {
+void pint(stack_t *stack) {
   if (stack->top == 0) {
     printf("Error: can't pint, stack empty\n");
     exit(EXIT_FAILURE);
@@ -38,7 +38,7 @@ void pint(struct Stack *stack) {
   printf("%d\n", stack->data[stack->top - 1]);
 }
 
-void pop(struct Stack *stack) {
+void pop(stack_t *stack) {
   if (stack->top == 0) {
     printf("Error: can't pop an empty stack\n");
     exit(EXIT_FAILURE);
@@ -47,7 +47,7 @@ void pop(struct Stack *stack) {
   stack->top--;
 }
 
-void swap(struct Stack *stack) {
+void swap(stack_t *stack) {
   if (stack->top < 2) {
     printf("Error: can't swap, stack too short\n");
     exit(EXIT_FAILURE);
@@ -58,7 +58,7 @@ void swap(struct Stack *stack) {
   stack->data[stack->top - 2] = temp;
 }
 
-void add(struct Stack *stack) {
+void add(stack_t *stack) {
   if (stack->top < 2) {
     printf("Error: can't add, stack too short\n");
     exit(EXIT_FAILURE);
@@ -72,7 +72,7 @@ void add(struct Stack *stack) {
 }
 
 int main(int argc, char *argv[]) {
-  struct Stack stack;
+  stack_t stack;
   char *line;
   int value;
 
@@ -122,4 +122,3 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
-
