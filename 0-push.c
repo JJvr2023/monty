@@ -1,65 +1,37 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "monty.h"
+/**
+ * f_push - add node to the stack
+ * @head: stack head
+ * @counter: line_number
+ * Return: no return
+*/
+void f_push(stack_t **head, unsigned int counter)
+{
+	int n, j = 0, flag = 0;
 
-#define STACK_SIZE 100
-
-typedef struct {
-  int data[STACK_SIZE];
-  int top;
-} Stack;
-
-void push(Stack *stack, int value) {
-  if (stack->top == STACK_SIZE) {
-    printf("Error: stack overflow\n");
-    exit(EXIT_FAILURE);
-  }
-
-  stack->data[stack->top++] = value;
-}
-
-void pall(Stack *stack) {
-  int i;
-
-  if (stack->top == 0) {
-    return;
-  }
-
-  for (i = stack->top - 1; i >= 0; i--) {
-    printf("%d\n", stack->data[i]);
-  }
-}
-
-int main(int argc, char *argv[]) {
-  Stack stack;
-  char *line;
-  int value;
-
-  stack.top = 0;
-
-  while (1) {
-    line = get_line();
-    if (line == NULL) {
-      break;
-    }
-    value = atoi(line);
-    if (value == -1) {
-      printf("Error: invalid integer\n");
-      exit(EXIT_FAILURE);
-    }
-
-    if (strcmp(line, "push") == 0) {
-      push(&stack, value);
-    } else if (strcmp(line, "pall") == 0) {
-      pall(&stack);
-    } else {
-      printf("Error: unknown opcode %s\n", line);
-      exit(EXIT_FAILURE);
-    }
-
-    free(line);
-  }
-
-  return 0;
+	if (bus.arg)
+	{
+		if (bus.arg[0] == '-')
+			j++;
+		for (; bus.arg[j] != '\0'; j++)
+		{
+			if (bus.arg[j] > 57 || bus.arg[j] < 48)
+				flag = 1; }
+		if (flag == 1)
+		{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+			fclose(bus.file);
+			free(bus.content);
+			free_stack(*head);
+			exit(EXIT_FAILURE); }}
+	else
+	{ fprintf(stderr, "L%d: usage: push integer\n", counter);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE); }
+	n = atoi(bus.arg);
+	if (bus.lifi == 0)
+		addnode(head, n);
+	else
+		addqueue(head, n);
 }
